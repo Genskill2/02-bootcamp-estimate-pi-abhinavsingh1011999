@@ -1,5 +1,6 @@
 import math
 import unittest
+import random
 
 class TestWallis(unittest.TestCase):
     def test_low_iters(self):
@@ -30,3 +31,37 @@ class TestMC(unittest.TestCase):
     
 if __name__ == "__main__":
     unittest.main()
+
+
+
+def wallis(n):
+
+    numerator = 2.0
+    denominator = 1.0
+    pi = 1.0
+
+    for i in range(1, n + 1):
+        pi *= (numerator / denominator)
+        if (i % 2) == 1:
+            denominator += 2.0
+        else:
+            numerator += 2.0
+
+    pi *= 2.0
+
+    return pi
+
+def monte_carlo(n):
+
+    inside = 0
+    i = 1
+
+
+    while (i <= n):
+        x = random.random()
+        y = random.random()
+        if ((x ** 2) + (y ** 2)) <= 1:
+            inside += 1
+        i += 1
+    pi = (4 * inside) / n
+    return pi
